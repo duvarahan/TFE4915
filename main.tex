@@ -1,0 +1,104 @@
+%\documentclass[a4paper,12pt,twoside,openright]{report}
+\documentclass[pdftex,10pt,b5paper,twoside]{book}
+\usepackage[utf8]{inputenc}
+
+\usepackage{natbib}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.12}
+\usepackage{textcomp}
+\usepackage{booktabs}
+\usepackage{mathtools}
+\usepackage{courier}
+\usepackage{mathptmx}
+\usepackage[compact]{titlesec}
+
+\usepackage{natbib}
+\usepackage{graphicx}
+
+\usepackage{listings}
+\usepackage{color}
+\usepackage{float}
+\usepackage{tikz}
+\usepackage{siunitx}
+\usetikzlibrary{arrows,automata}
+\usepackage{subcaption}
+\usepackage{hyperref}
+\usepackage[lmargin=25mm,rmargin=25mm,tmargin=30mm,bmargin=30mm]{geometry}
+\usepackage{multirow}
+
+\usepackage[parfill]{parskip}
+\setlength{\parindent}{0cm} 
+
+\usepackage{url}
+\usepackage{appendix}
+
+\lstset{basicstyle=\footnotesize\ttfamily,breaklines=true}
+
+\raggedbottom
+%\setlength{\parskip}{1cm plus4mm minus3mm}
+
+% Edit the meta.tex file to change title, group number and author names
+\input{meta.tex}
+
+
+
+
+\begin{document}
+
+\pagenumbering{roman}
+% The title page, edit if you want to customize it
+\input{title.tex}
+
+\begin{center}
+ \textbf{PROJECT ASSIGNMENT}\\[4ex]
+\end{center}
+\textbf{Candidate name:} Duvarahan Kirishnathasan\\[4ex]
+\textbf{Assignment title:} Embedded High-Resolution Delta-Sigma ADC for Microcontrollers\\[4ex]
+\textbf{Assignment text:}\\[2ex]
+The main objective is to define a state of the art high-resolution delta sigma ADC. Main features are approx 16 bits resolution and above 10MHz conversion rate.
+
+In this project the student will do a study on delta-sigma type ADC converters to find good trade-offs and optimize a design for high-resolution conversion in embedded applications. The chosen approach shall then be assessed and modelled to develop a complete ADC design specification.
+
+The project will be suitable for students with analog and mixed-signal specialization, and an interest for analog-to-digital converters in particular. Microchip will offer the opportunity for enthusiastic students to develop their skills in a leading edge electronics R\&D environment.
+
+The required software, hardware and a working place at Microchip’s office could be provided.
+
+
+\textbf{Assignment proposer / Co-supervisor:} Ivar Løkken\\[4ex]
+\textbf{Supervisor:} Trond Ytterdal
+
+
+
+\begin{center}
+    \textbf{Abstract}
+\end{center}
+Analog to digital converters play an important role in mixed signal circuit design. Traditionally Nyquist-rate converters have been used to convert, but as the digital world requires more resolution, these converters are not sufficient enough to fulfill them. The oversampling converters can achieve these resolution demands easily with a much higher sampling frequency. Furthermore the Nyquist-rate converters need analog components which are precise and highly immune to noise and interference. In contrast, the oversampling converters can use simple and highly tolerant analog components.
+
+
+
+\tableofcontents
+\listoffigures
+\listoftables
+ \pagenumbering{arabic}
+
+% Main matter - edit corresponding file under content/ to change
+\input{content/Introduction.tex}
+\input{content/Background_Theory.tex}
+\input{content/Proposed_Topology.tex}
+\input{content/Specification.tex}
+\input{content/Circuit_Design.tex}
+\input{content/Results.tex}
+\input{content/Conclusion.tex}
+
+
+
+
+% Bibliography - edit references.bib and use the \cite command in text
+\input{content/reference.tex}
+\input{content/appendix.tex}
+
+
+
+
+\end{document}
