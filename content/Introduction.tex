@@ -27,4 +27,23 @@ Figure \ref{intro_design_flow} depict the design flow of the $\Delta\Sigma$ modu
 \label{intro_design_flow}
 \end{figure}
 
-\textbf{The model was first synthesized using Richard. Schreier’s $\Delta\Sigma$ toolbox in MatLab\cite{tool}} based on the fundamental requirements, such as resolution, bandwidth and OSR. The results from the toolbox were used to derive a state description based on the modulator order, filter coefficients, number of bits of the quantizer and loop topology.  
+\textbf{The model was first synthesized using Richard. Schreier’s $\Delta\Sigma$ toolbox in MatLab\cite{tool}} based on the fundamental requirements, such as resolution, bandwidth and OSR. The results from the toolbox were used to derive a state description based on the modulator order, filter coefficients, number of bits of the quantizer and loop topology. Stability and performance analysis were performed in order to maintain the modulator's integrity.
+
+\textbf{VerilogA was used to implement} the analog blocks from the architectural performance. Behavioral model was done by Cadence Virtuoso ADE to derive the specifications of the analog blocks such that the fabrication process variations do not affect the system performance.
+
+\textbf{Finally the VerilogA models} were replaced by transistor schematics. These schematics were verified according to the specifications found in behavioural modeling using nominal and process, supply voltage and temperature variations (PVT simulations) using Spectre. 
+
+\section{Thesis outline}
+
+\textbf{Chapter 2 - Background theory}: The fundamentals of $\Delta\Sigma$, concept of oversampling . noise-shaping and switched-capacitor circuits are presented. Additionally the theory behind the $g_m/I_D$ methodology is also presented. 
+
+\textbf{Chapter 3 - Proposed architecture}: The decision of the architecture based on loop filter order, topologies, time-domain, number of quantizer bit and operational transconductance amplifier (OTA) is also discussed. 
+
+\textbf{Chapter 4 - Specifications of the design}:
+The results obtained in the feasibility study is summarized and discussed here. They were used as specifications to implement the analog blocks in transistor level. 
+
+\textbf{Chapter 5 - Circuit design}: It contains the complete design methodology adopted to the successful implementation of the modulator. It also presents the analysis and the design of the analog blocks used, such as: switches, two phase clock generator, OTAs and comparator.    
+
+\textbf{Chapter 6 - Results}: Here the results and discussion of all the blocks designed and implemented is presented, where the results is presented by both nominal and PVT simulations. The nominal and PVT simulations of the whole modulator is given as a final results for the thesis. 
+
+\textbf{Chapter 7 - Conclusion} : A summary and conclusion of the work is presented. some suggestion regarding the future work that can sought is also presented. 

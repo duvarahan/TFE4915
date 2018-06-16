@@ -49,7 +49,7 @@ With the use of nominal and PVT simulation the specifications were validated. Th
 \end{tabular}
 \end{table}
 
-The main results of the nominal simulations of OTA 1, 2 and 3 are listed in table \ref{nominal_ota}, and frequency response is depicted in Fig. \ref{frequrncy_out}. AS discussed in chapter 3 the specifications of the OTAs are indeed relaxed, which made the design process that much easier. The DC-gain and GBW fulfill the specifications with good margin for all three OTAs. Even with the common mode feedback block which effect the stability, the phase margin of the three OTAs exceeds the requirements. Additionally the power consumption including the bias circuit were around 22.3 $\mu W$, 11.7$\mu W$ and 8.5$\mu W$ for OTA 1, 2 and 3 respectively. One thing to notice is that the power consumption of OTA 1 is much greater than for OTA 2 and 3 due to the slew rate requirement. Different topologies can be used to reduce the power consumption of OTA 1, such as an adaptive bias circuit \cite{adaptive}. It improves the power efficiency while achieving high slew rate. 
+The main results of the nominal simulations of OTA 1, 2 and 3 are listed in table \ref{nominal_ota}, and frequency response is depicted in Fig. \ref{frequrncy_out}. AS discussed in chapter 3 the specifications of the OTAs are indeed relaxed, which made the design process that much easier. The DC-gain and GBW fulfill the specifications with good margin for all three OTAs. Even with the common mode feedback block which effect the stability, the phase margin of the three OTAs exceeds the requirements. Additionally the power consumption including the bias circuit were around 22.3 $\mu W$, 11.7$\mu W$ and 8.5$\mu W$ for OTA 1, 2 and 3 respectively. One thing to notice is that the power consumption of OTA 1 is greater than for OTA 2 and 3 due to the slew rate requirement. Different topologies can be used to reduce the power consumption of OTA 1, such as an adaptive bias circuit \cite{adaptive}. It improves the power efficiency while achieving high slew rate. 
 
 \begin{figure}[H]
 \centering
@@ -209,27 +209,27 @@ Table \ref{modul_noiseless_out} summarize the SNRs, SINADs and ENOBs for all six
 
 \caption{Results of the PVT simulations of the noiseless modulator}
 \label{modul_noiseless_out}
-\begin{tabular}{l|l|l}
+\begin{tabular}{l|l|l|l}
 \hline
-\multirow{1}{*}{Simulation} & \multicolumn{1}{c|}{SNR[dB]} & \multicolumn{1}{c}{ENOB[bits]} \\\cline{1-3}
+\multirow{1}{*}{Simulation} & \multicolumn{1}{c|}{SINAD[dB]} & \multicolumn{1}{c|}{SNR[dB]} & \multicolumn{1}{c}{ENOB[bits]} \\\cline{1-4}
                        
-            Nominal       & 101.20 & 16.5\\
-            Corner 0      & 99.71 & 16.2\\
-            Corner 1      & 100.62 & 16.3\\
-            Corner 2      & 101.50 & 16.6\\
-            Corner 3     & 102.90 & 16.8\\
-            Corner 4     & 100.31 & 16.3\\
-            Corner 5      & 101.91 & 16.6\\
-            Corner 6      & 101.83 & 16.6\\
-            Corner 7      & 101.32 & 16.5\\
-            Corner 8      & 100.84 & 16.4\\
-            Corner 9      & 102.19 & 16.7\\
-            Corner 10      & 101.43 & 16.6\\
-            Corner 11      & 102.31 & 16.7\\
-            Corner 12      & 97.30 & 16.1\\
-            Corner 13      & 99.62 & 16.2\\
-            Corner 14      & 101.44 & 16.5\\
-            Corner 15      & 101.61 & 16.5\\
+            Nominal       &100.11 & 101.20 & 16.5\\
+            Corner 0      &97.52 & 99.71 & 16.2\\
+            Corner 1      &99.12 & 100.62 & 16.3\\
+            Corner 2      &101.22 & 101.50 & 16.6\\
+            Corner 3     &101.95 & 102.90 & 16.8\\
+            Corner 4     &98.83 & 100.31 & 16.3\\
+            Corner 5      &100.46 & 101.91 & 16.6\\
+            Corner 6      &101.45& 101.83 & 16.6\\
+            Corner 7      &100.78& 101.32 & 16.5\\
+            Corner 8      &99.39& 100.84 & 16.4\\
+            Corner 9      &101.94& 102.19 & 16.7\\
+            Corner 10      &99.89& 101.43 & 16.6\\
+            Corner 11      &101.86& 102.31 & 16.7\\
+            Corner 12      &96.29& 97.30 & 16.1\\
+            Corner 13      &98.54& 99.62 & 16.2\\
+            Corner 14      &100.67& 101.44 & 16.5\\
+            Corner 15      &100.74& 101.61 & 16.5\\
             
 \hline            
 \end{tabular}
@@ -250,27 +250,27 @@ The modulator was simulated transient noise feature of the simulator. The PSD of
 
 \caption{Results of the PVT simulations of the noisy modulator}
 \label{modul_noisy_out}
-\begin{tabular}{l|l|l}
+\begin{tabular}{l|l|l|l}
 \hline
-\multirow{1}{*}{Simulation} & \multicolumn{1}{c|}{SNR[dB]} & \multicolumn{1}{c}{ENOB[bits]} \\\cline{1-3}
+\multirow{1}{*}{Simulation} & \multicolumn{1}{c|}{SINAD[dB]} & \multicolumn{1}{c|}{SNR[dB]} & \multicolumn{1}{c}{ENOB[bits]} \\\cline{1-3}
                        
-            Nominal       & 99.67 & 16.2\\
-            Corner 0      & 94.86 & 15.8\\
-            Corner 1      & 96.31 & 16.0\\
-            Corner 2      & 100.54 & 16.3\\
-            Corner 3     & 101.12 & 16.4\\
-            Corner 4     & 97.23 & 16.1\\
-            Corner 5      & 100.73 & 16.3\\
-            Corner 6      & 97.20 & 16.1\\
-            Corner 7      & 99.75 & 16.2\\
-            Corner 8      & 96.44 & 16.0\\
-            Corner 9      & 101.34 & 16.5\\
-            Corner 10      & 100.75 & 16.4\\
-            Corner 11      & 101.55 & 16.6\\
-            Corner 12      & 94.2 & 15.7\\
-            Corner 13      & 96.15 & 16\\
-            Corner 14      & 97.23 & 16.1\\
-            Corner 15      & 99.9 & 16.3\\
+            Nominal      &98.23 & 99.67 & 16.2\\
+            Corner 0      &93.65 & 94.86 & 15.8\\
+            Corner 1      &95.78 & 96.31 & 16.0\\
+            Corner 2      &98.93 & 100.54 & 16.3\\
+            Corner 3     &100.76 & 101.12 & 16.4\\
+            Corner 4     &96.59 & 97.23 & 16.1\\
+            Corner 5      &99.41 & 100.73 & 16.3\\
+            Corner 6      &96.78 & 97.20 & 16.1\\
+            Corner 7      &98.26 & 99.75 & 16.2\\
+            Corner 8      &95.84 & 96.44 & 16.0\\
+            Corner 9      &100.77 & 101.34 & 16.5\\
+            Corner 10      &99.00 & 100.75 & 16.4\\
+            Corner 11      &100.78 & 101.55 & 16.6\\
+            Corner 12      &93.89 & 94.2 & 15.7\\
+            Corner 13      &95.55 & 96.15 & 16\\
+            Corner 14      &96.69 & 97.23 & 16.1\\
+            Corner 15      &98.76 & 99.9 & 16.3\\
             
 \hline            
 \end{tabular}
@@ -278,3 +278,35 @@ The modulator was simulated transient noise feature of the simulator. The PSD of
 
 
 \section{Summary of the performance }
+
+
+
+\begin{table}[H]
+\centering
+
+\caption{Comparison with other works}
+\label{comparsion_works}
+\begin{tabular}{l|l|l|l|l|l}
+\hline
+\multirow{1}{*}{Ref.} & \multicolumn{1}{c|}{Process [$\mu$m]} & \multicolumn{1}{c|}{OSR} & \multicolumn{1}{c|}{fs [MHz]} & \multicolumn{1}{c|}{Supply [V]} & \multicolumn{1}{c}{BW [kHz]}  \\\cline{1-6}
+
+            \cite{ref_1} & 1.5 & 64 & 10.24MHz & 5 & 160\\
+
+\hline            
+\end{tabular}
+\end{table}
+
+
+\begin{table}[H]
+\centering
+
+\caption{Comparison with other works continued}
+\label{comparsion_works_2}
+\begin{tabular}{l|l|l|l}
+\hline
+\multirow{1}{*}{Ref.} & \multicolumn{1}{c|}{Power [$\mu$W]} & \multicolumn{1}{c|}{SINAD [dB]} & \multicolumn{1}{c}{ENOB bit}\\\cline{1-4}
+
+        \cite{ref_1} & 7600 & 91 & 16\\
+\hline            
+\end{tabular}
+\end{table}
