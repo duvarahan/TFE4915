@@ -1,10 +1,10 @@
 \chapter{Results}\label{res:results}
 
-The results for the analog blocks were obtained by using spectre simulator in CADENCE. In case of noise simulation a transient noise was imposed. The functionality and integrity of the modulator and the analog blocks were validated using Nominal simulation. Additionally PVT simulations were performed on the modulator,the OTAs and the quantizer in order to verify the robustness of these blocks. The nominal simulation operate with typical transistor model at room temperature and standard supply voltage. PVT simulation on the other hand operate with corner models of the the process where the range of the temperatures are between $-40^\circ$ and $105^\circ$, and 2.5 V and 5.5 V for the supply voltage. Furthermore it also consists of performing many simulations based on the statistical model of the transistors, namely 16. The corners model of the transistors provided by Microchip Technology are: slow, fast, slow-NMOS-fast-PMOS (SNFP) and fast-NMOS-slow-PMOS (FNSP). 
+The results for the analog blocks were obtained by using spectre simulator in Cadence Virtuoso ADE. In case of noise simulation a transient noise was imposed. The functionality and integrity of the modulator and the analog blocks were validated using Nominal simulation. Additionally PVT simulations were performed on the modulator,the OTAs,the quantizer and the clock generator in order to verify the robustness of these blocks. The nominal simulation operate with typical transistor model at room temperature and standard supply voltage. PVT simulation on the other hand operate with corner models of the the process where the range of the temperatures are between $-40^\circ$ and $105^\circ$, and 2.5 V and 5.5 V for the supply voltage. Furthermore it also consists of performing many simulations based on the statistical model of the transistors, namely 16. The corners model of the transistors provided by Microchip Technology are: slow, fast, slow-NMOS-fast-PMOS (SNFP) and fast-NMOS-slow-PMOS (FNSP). 
 
 
 \section{Non-overlapping clock}
-The output signals from the designed non-overlapping clock generator is shown in Fig. \ref{clock_out}. The non-overlapping time is 23.52nsec between $\phi_1$ and $\phi_2$, and $\phi_{1d}$ is delayed from $\phi_1$ with 10nec, the same apply for $\phi_{2d}$ and $\phi_2$. It should be noted that the delays are not affected by mismatch effects and process variation. 
+The output signals from the designed non-overlapping clock generator is shown in Fig. \ref{clock_out}. The non-overlapping time is 23.52nsec between $\phi_1$ and $\phi_2$, and $\phi_{1d}$ is delayed from $\phi_1$ with 10nec, the same delay apply for $\phi_{2d}$ and $\phi_2$. It should be noted that the delays are not affected by mismatch effects and process variation. 
 
 \begin{figure}[h]
 \centering
@@ -14,7 +14,7 @@ The output signals from the designed non-overlapping clock generator is shown in
 \end{figure}
 
 \section{Quantizer}
-The quantizer used is simply a latched comparator which switches to the rail supply depending on the input signals. It is designed as per the methodology discussed earlier. The quantizer was simulated using three input signals: $V_{in+}$, $V_{in-}$ and CLK. The positive and negative input voltages are signals that vary from ground to $V_{DD}$ and from $V_{DD}$ to ground respectively. The output only changes at the rising edge of the clock. As mentioned in the methodology the hysteresis parameter was used to validate the quantizer, since the input offset and the input referred noise get attenuated by the feedback loop of the modulator. Figure \ref{comparator_out} shows when the output gets updated as the input voltages $V_{in+}$ and $V_{in-}$ vary. Due to the regenerative latch the hysteresis of the quantizer was measured as small as 586$\mu V/V$. PVT simulations were performed with no corners being critical to the quantizer's performance. 
+The quantizer used is simply a latched comparator which switches to the rail supply depending on the input signals. It is designed as per the methodology discussed earlier. The quantizer was simulated using three input signals: $V_{in+}$, $V_{in-}$ and CLK. The positive and negative input voltages are signals that vary from ground to $V_{DD}$ and from $V_{DD}$ to ground respectively. The output only changes at the rising edge of the clock. As mentioned in the methodology the hysteresis parameter was used to validate the quantizer, since the input offset and the input referred noise get attenuated by the feedback loop of the modulator. Figure \ref{comparator_out} shows when the output gets updated as the input voltages $V_{in+}$ and $V_{in-}$ vary. Due to the regenerative latch the hysteresis of the quantizer was measured as small as 5.86$m V/V$. PVT simulations were performed with no corners being critical to the quantizer's performance. 
 
 \begin{figure}[H]
 \centering
@@ -49,7 +49,7 @@ With the use of nominal and PVT simulation the specifications were validated. Th
 \end{tabular}
 \end{table}
 
-The main results of the nominal simulations of OTA 1, 2 and 3 are listed in table \ref{nominal_ota}, and frequency response is depicted in Fig. \ref{frequrncy_out}. AS discussed in chapter 3 the specifications of the OTAs are indeed relaxed, which made the design process that much easier. The DC-gain and GBW fulfill the specifications with good margin for all three OTAs. Even with the common mode feedback block which effect the stability, the phase margin of the three OTAs exceeds the requirements. Additionally the power consumption including the bias circuit were around 22.3 $\mu W$, 11.7$\mu W$ and 8.5$\mu W$ for OTA 1, 2 and 3 respectively. One thing to notice is that the power consumption of OTA 1 is greater than for OTA 2 and 3 due to the slew rate requirement. Different topologies can be used to reduce the power consumption of OTA 1, such as an adaptive bias circuit \cite{adaptive}. It improves the power efficiency while achieving high slew rate. 
+The main results of the nominal simulations of OTA 1, 2 and 3 are listed in table \ref{nominal_ota}, and frequency responses are depicted in Fig. \ref{frequrncy_out}. As discussed in chapter 3 the specifications of the OTAs are indeed relaxed, which made the design process that much easier. The DC-gain and GBW fulfill the specifications with good margin for all three OTAs. Even with the common mode feedback block which effect the stability, the phase margin of the three OTAs exceeds the requirements. Additionally the power consumption including the bias circuit were around 22.3 $\mu W$, 11.7$\mu W$ and 8.5$\mu W$ for OTA 1, 2 and 3 respectively. One thing to notice is that the power consumption of OTA 1 is greater than for OTA 2 and 3 due to the slew rate requirement. Different topologies can be used to reduce the power consumption of OTA 1, such as an adaptive bias circuit \cite{adaptive}. It has the advantage of improving the power efficiency while achieving high slew rate. 
 
 \begin{figure}[H]
 \centering
@@ -65,7 +65,7 @@ The main results of the nominal simulations of OTA 1, 2 and 3 are listed in tabl
 \label{frequrncy_out}
 \end{figure}
 
-The maximum and minimum output voltages of OTA 1 and 2 within in the requirement in table \ref{spec_ota} with headroom to spare, since the transistors $M_3$, $M_4$, $M_9$ and $M_10$ operated in moderate region. However the maximum and minimum output voltages of OTA 3 fulfill the requirements just barley. This will not affect the performance of the modulator as it will be seen in subsequent sections. 
+The maximum and minimum output voltages of OTA 1 and 2 are within the requirements in table \ref{spec_ota} with headroom to spare, since the transistors $M_3$, $M_4$, $M_9$ and $M_10$ operated in moderate region. However the maximum and minimum output voltages of OTA 3 fulfill the requirements just barley. This will not affect the performance of the modulator as it will be seen in subsequent sections. 
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{images/nominal_slew_rate_1_2_3.jpg}
@@ -140,7 +140,7 @@ The most critical environment for all three OTAs is corner 3, where the power co
 \end{tabular}
 \end{table}
 
-Power consumption nearly double of the nominal values for all three OTAs in corner 3, with the consumption of OTA 1 being noticeable big of 45.4 $\mu W$. The technique mentioned in the previous section can be used to reduce it.   
+Power consumption is nearly double of the nominal value for all three OTAs in corner 3, with the consumption of OTA 1 being noticeable big i.e. 45.4 $\mu W$. The technique mentioned in the previous section can be used to reduce it.   
 
 Figures \ref{corner_freq_1}, \ref{corner_freq_2} and \ref{corner_freq_3} illustrate the plots of the frequency responses for all corners for OTA 1, 2 and 3 respectively. As seen the DC gain for OTA 1 and 3 are worst in corner 10, while for OTA 2 it is worst in corner 6. Both corners have high supply voltage and low temperature. Nevertheless the DC gains satisfy the specifications of table \ref{spec_ota} with good margin. The phase margins also fulfill the specifications in the worst corner 6, and thereby ensuring fastest settling time.  
 
@@ -236,7 +236,7 @@ Table \ref{modul_noiseless_out} summarize the SNRs, SINADs and ENOBs for all six
 \end{table}
 
 \subsection{Noise simulation}
-The modulator was simulated transient noise feature of the simulator. The PSD of the output signal is depicted in Fig \ref{psd_noise_out}. The PVT simulations are listed in table \ref{modul_noisy_out} where it can be observed that all corners except corners 0 and 12 achieve the specification of 16 bit. Nonetheless this is not a big problem as it is expected when introducing noise. Furthermore 15.7 and 15.8 bits are quite close to 16. 
+The modulator was simulated transient noise feature of the simulator. The PSD of the output signal is depicted in Fig \ref{psd_noise_out}. The PVT simulations are listed in table \ref{modul_noisy_out} where it can be observed that all corners except corners 0 and 12 achieve the specification of 16 bit. Nonetheless this is not a big problem as it is expected when introducing noise. Furthermore 15.7 and 15.8 bits are quite close to 16 bits. 
 
 \begin{figure}[H]
 \centering
@@ -278,7 +278,7 @@ The modulator was simulated transient noise feature of the simulator. The PSD of
 
 
 \section{Summary of the performance }
-Tables \ref{comparsion_works} and \ref{comparsion_works_2} summarize the main results\footnote{Main results from nominal simulation with noise.} and compare it with similar works. It can be seen that the figure of merit (FoM)\footnote{$FoM = \frac{P}{2^{ENOB}*2*f_b}[\frac{pJ}{step}]$} is not the lowest, but it has the potential to get reduced by using techniques to reduce the power consumption. However it seems to stand the ground with other works using 0.18$\mu m$ CMOS process. 
+Tables \ref{comparsion_works} and \ref{comparsion_works_2} summarize the main results\footnote{Main results from nominal simulation with transient noise.} and compare it with similar works. It can be seen that the figure of merit (FoM)\footnote{$FoM = \frac{P}{2^{ENOB}\cdot2f_b}[\frac{pJ}{step}]$} is not the lowest, but it has the potential to get smaller by using techniques to reduce the power consumption. However, it seems to stand the ground with other works using 0.18$\mu m$ CMOS process. 
 
 
 \begin{table}[H]
