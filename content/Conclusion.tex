@@ -14,8 +14,12 @@ This thesis has provided useful insight about the flow of designing and implemen
 
 The next step in the design process of the ADC could be to integrate the modulator with other blocks in the receive path to demonstrate an overall system. One of these blocks required to complete the ADC is a decimation filter, which is a challenge in itself. The decimation filter performs two important tasks. One being filtering out frequency components above $f_b$ from the output signal from the quantizer, the other is down-sampling the data from the oversampling frequency to the Nyquist rate. Another thing to look at is a way of generating the three bias currents used in the OTAs. 
 
-A Monte Carlo simulation of the modulator could be useful for deriving a model that includes the statistical variation of the parameters. It would both help in finding the statistical specifications of the integrators and verify that the mismatch effects do not affect the modulator performance. 
+Monte Carlo simulations of the modulator could be useful for deriving a model that includes the statistical variation of the parameters. It would both help in finding the statistical specifications of the integrators and verify that the mismatch effects do not affect the modulator performance. 
 
 \subsection{Circuit level}
 
-It was observed that the power consumption of OTA 1 was a little high. A way of reducing it, an adaptive bias circuit with the folded cascode architecture can be used which improves the power efficiency while achieving high slew rate. 
+It was observed that the power consumption of OTA 1 was a little high. A way of reducing it, an adaptive bias circuit with the folded cascode architecture can be used which improves the power efficiency while achieving high slew rate. It will operate in class AB. 
+
+Monte Carlo simulations should be done for the OTAs, as the effects of mismatch on these important analog blocks are of interest.
+
+Finally a layout should be realized of the modulator to verify that the parasitic capacitors do not affect its response. It could also be interesting to fabricate and measure a test-chip based on the modulator core.

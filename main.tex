@@ -1,5 +1,5 @@
 
-\documentclass[pdftex,10pt,b5paper,twoside,openright]{report}
+\documentclass[pdftex,10pt,b5paper,twoside]{book}
 \usepackage[utf8]{inputenc}
 
 \usepackage{natbib}
@@ -13,6 +13,7 @@
 \usepackage{mathptmx}
 \usepackage[compact]{titlesec}
 
+
 \usepackage{natbib}
 \usepackage{graphicx}
 
@@ -24,8 +25,9 @@
 \usetikzlibrary{arrows,automata}
 \usepackage{subcaption}
 \usepackage{hyperref}
-\usepackage[lmargin=22mm,rmargin=22mm,tmargin=30mm,bmargin=30mm]{geometry}
+\usepackage[lmargin=25mm,rmargin=25mm,tmargin=30mm,bmargin=30mm]{geometry}
 \usepackage{multirow}
+\usepackage[bottom]{footmisc}
 
 \usepackage[parfill]{parskip}
 \setlength{\parindent}{0cm} 
@@ -46,9 +48,9 @@
 
 \begin{document}
 
-\pagenumbering{roman}
+\frontmatter
 % The title page, edit if you want to customize it
-\input{title.tex}
+%\input{title.tex}
 
 \begin{center}
  \textbf{PROJECT ASSIGNMENT}\\[4ex]
@@ -70,17 +72,42 @@ The required software, hardware and a working place at Microchip’s office coul
 
 
 
-\begin{center}
-    \textbf{Abstract}
-\end{center}
-Analog to digital converters play an important role in mixed signal circuit design. Traditionally Nyquist-rate converters have been used to convert, but as the digital world requires more resolution, these converters are not sufficient enough to fulfill them. The oversampling converters can achieve these resolution demands easily with a much higher sampling frequency. Furthermore the Nyquist-rate converters need analog components which are precise and highly immune to noise and interference. In contrast, the oversampling converters can use simple and highly tolerant analog components.
 
+\chapter*{Abstract}
+
+This thesis do a study on $\Delta\Sigma$ type A/D converters to find good trade-offs and optimize a design for high resolution conversion in embedded applications. The main objective is to define a state of the art high-resolution $\Delta\Sigma$ ADC with main feature such as approximate 16 bits resolution and above 10MHz conversion rate. A behavioural model was developed in the the feasibility study to derive a complete design specification for a third-order fully differential discrete $\Delta\Sigma$ modulator. The specifications were used in this thesis to implement the modulator in transistor-level. The circuit is developed in a 0.18$\mu m$ CMOS process technology that employs a standard supply voltage of 1.8 V.
+
+The OTAs are designed using folded cascode topology. A wide swing current mirror is used to bias the transistors, and switched CMFB circuit is implemented to stabilize the common mode output of the OTAs. A methodology called $g_m/I_D$ is used to find dimensions for the transistors of the OTAs by characterizing their performances. The 1-bit quantizer is implemented as a latched comparator with low hysteresis. A two-phase non-overlapping clock generator with delayed phases is designed in order to operate the discrete circuit. The simulations on each corner of the technology confirm that the modulator satisfies the specifications, even in the worst case. The nominal simulation with transient noise gives a SINAD equals to 98.23dB which corresponds to a resolution of 16.2 bits. The total static power dissipation is 87$\mu W$ with a FoM of 0.20$pJ/step$
+
+
+\chapter*{Sammendrag}
+Denne masteroppgaven gjør en studie av $\Delta\Sigma$ type A/D konverterer for å finne gode kompromisser og optimalisere en design for en konverterer med høy oppløsning i innvevde applikasjoner.
+Hovedmålet er å definiere det nyeste innenfor høy-oppløsning $\Delta\Sigma$ ADC med trekk som tilnærmet 16 bits oppløsing og over 10MHz konverteringsfrekvens. En adferdsmodell ble utviklet i forprosjektet for finne en fullstendig liste med spesifikasjoner for en tredje ordens, fullt differensial diskret $\Delta\Sigma$ modulator. Spesifikasjonene ble brukt i masteroppgaven til å implementere modulatoren i transistor-nivå. Kretsen er utviklet i 0.18$\mu m$ CMOS prosess og det er brukt en forsyningsspenning på 1.8 V.
+
+OTA-ene er designet ved hjelp av folded cascode arkitektur. En bred sving strømspeil er brukt til å forspenne transistorene, og en CMFB krets er implementert til å stabilisere utgangen av OTA-ene. En metodikk kalt $g_m/I_D$ er brukt til å finne størrelsene til transistorene OTA-ene består av, ved å karakterisere deres opptreden. 1-bit kvantitisatoren er implementert som en låst komparator med lav hysterese. En ikke-overlappende klokke generator som generer to faser og deres respektive forsinkende faser har blitt designet for å operere den diskrete kretsen. Simulasjonen i hver hjørne av prosessen bekrefter at modulatoren tilfredsstiller spesifikasjonene, til og med for det verste tilfellet. Nominell simulasjon med flyktig støy gir en SINAD på 98.23dB som tilsvarer en oppløsning på 16.2 bits. Den totale statiske effektforbruket ble 87$\mu W$ med en FoM på 0.20$pJ/steps$.   
+
+
+
+\chapter*{Preface}
+
+This thesis was carried out during Spring 2018 and submitted to NTNU, Trondheim June 18, 2018. 
+
+I would like to thank Microchip Technology for letting me stay and work in their office, and for providing design tools to complete my task. I like to especially thank my supervisor Ivar Løkken for providing great support, guidance and insight throughout the work with this thesis. 
+
+I would also like to thank Trond Ytterdal for offering great input, guidance and for sharing his great experience in circuit design which made the process of the design much easier.
+
+Trondheim, June 18, 2018,
+
+Duvarahhan Kirishnathasan
+
+\input{content/Abbreviations.tex}
 
 
 \tableofcontents
 \listoffigures
 \listoftables
- \pagenumbering{arabic}
+
+\mainmatter
 
 % Main matter - edit corresponding file under content/ to change
 \input{content/Introduction.tex}
@@ -95,6 +122,7 @@ Analog to digital converters play an important role in mixed signal circuit desi
 
 
 % Bibliography - edit references.bib and use the \cite command in text
+
 \input{content/reference.tex}
 \input{content/appendix.tex}
 

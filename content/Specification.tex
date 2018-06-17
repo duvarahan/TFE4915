@@ -2,10 +2,13 @@
 In the feasibility study a set of specifications were obtained using behavioural modeling. In this chapter a small discussion of the results will be presented with additional specifications needed to implement the circuit design.
 
 The specifications can be divided into two categories as listed below. 
+\begin{itemize}
 
-$\bullet$ \textbf{Requirements for the integrators}: The requirement for the total noise was derived in the feasibility study to find the optimal size for the capacitors used by the integrators and the summing node. In the feasibility study it was found out that matching requirements were needed, and with parameters given by \textit{Microchip} \cite{private}, we could calculate realizable capacitors values. In this thesis the matching requirements are the same, but the parameters are different, thus giving us a new set of capacitors values. The switch's on resistance were found after an exhaustive iteration of simulation.
 
-$\bullet$ \textbf{Requirements for the Amplifier}: After an exhaustive iteration of simulation, the specifications for the finite DC gain, GBW and slew rate were found. The output-swing and the load capacitance seen from each output of the OTAs is also presented here. 
+\item \textbf{Requirements for the integrators}: The requirement for the total noise was derived in the feasibility study to find the optimal size for the capacitors used by the integrators and the summing node. In the feasibility study it was found out that matching requirements were needed, and with parameters given by \textit{Microchip} \cite{private}, we could calculate realizable capacitors values. In this thesis the matching requirements are the same, but the parameters are different, thus giving us a new set of capacitors values. The switch's on resistance were found after an exhaustive iteration of simulation.
+
+\item \textbf{Requirements for the Amplifier}: After an exhaustive iteration of simulation, the specifications for the finite DC gain, GBW and slew rate were found. The output-swing and the load capacitance seen from each output of the OTAs is also presented here. 
+\end{itemize}
 
 \section{Sizing of Capacitors}
 The proposed architecture was a discrete-time third-order single-bit single-loop feedforward $\Delta\Sigma$ modulator, as shown in figure \ref{fig:input}. The transfer function for the non-inverting integrators is given by,

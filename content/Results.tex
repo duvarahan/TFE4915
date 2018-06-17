@@ -252,7 +252,7 @@ The modulator was simulated transient noise feature of the simulator. The PSD of
 \label{modul_noisy_out}
 \begin{tabular}{l|l|l|l}
 \hline
-\multirow{1}{*}{Simulation} & \multicolumn{1}{c|}{SINAD[dB]} & \multicolumn{1}{c|}{SNR[dB]} & \multicolumn{1}{c}{ENOB[bits]} \\\cline{1-3}
+\multirow{1}{*}{Simulation} & \multicolumn{1}{c|}{SINAD[dB]} & \multicolumn{1}{c|}{SNR[dB]} & \multicolumn{1}{c}{ENOB[bits]} \\\cline{1-4}
                        
             Nominal      &98.23 & 99.67 & 16.2\\
             Corner 0      &93.65 & 94.86 & 15.8\\
@@ -278,19 +278,28 @@ The modulator was simulated transient noise feature of the simulator. The PSD of
 
 
 \section{Summary of the performance }
-
+Tables \ref{comparsion_works} and \ref{comparsion_works_2} summarize the main results\footnote{Main results from nominal simulation with noise.} and compare it with similar works. It can be seen that the figure of merit (FoM)\footnote{$FoM = \frac{P}{2^{ENOB}*2*f_b}[\frac{pJ}{step}]$} is not the lowest, but it has the potential to get reduced by using techniques to reduce the power consumption. However it seems to stand the ground with other works using 0.18$\mu m$ CMOS process. 
 
 
 \begin{table}[H]
 \centering
-
 \caption{Comparison with other works}
 \label{comparsion_works}
 \begin{tabular}{l|l|l|l|l|l}
 \hline
 \multirow{1}{*}{Ref.} & \multicolumn{1}{c|}{Process [$\mu$m]} & \multicolumn{1}{c|}{OSR} & \multicolumn{1}{c|}{fs [MHz]} & \multicolumn{1}{c|}{Supply [V]} & \multicolumn{1}{c}{BW [kHz]}  \\\cline{1-6}
 
-            \cite{ref_1} & 1.5 & 64 & 10.24MHz & 5 & 160\\
+            \cite{ref_1} & 1.5 & 64 & 10.24 & 5 & 160\\
+            \cite{ref_2} & 3 & 256 & 4 & 5 & 8\\
+            \cite{ref_3} & 0.35 & 256 & 12.8 & 3.3 & 25\\
+            \cite{SQNR} & 0.18 & 256 & 1 & 1.8 & 2 \\
+            \cite{ref_4} & 0.18 & 128 & 0.256 & 1.5 & 1.0\\ 
+            \cite{ref_5} & 0.13 & 40 & 1.048 & 1 & 8.0 \\
+            \cite{ref_6} & 0.18 & 256 & 5.12 & 3.3 & 10\\
+            \cite{ref_7} & 0.18 & 250 & 5 & 1.8 & 10\\
+            \cite{ref_8} & 0.18 & 64 & 1.28 & 1.8 & 10\\
+            \cite{ref_9} & 0.13 & 40 & 0.8& 0.8& 10 \\
+            This work & 0.18 & 170 & 10 & 1.8 & 29\\
 
 \hline            
 \end{tabular}
@@ -302,11 +311,21 @@ The modulator was simulated transient noise feature of the simulator. The PSD of
 
 \caption{Comparison with other works continued}
 \label{comparsion_works_2}
-\begin{tabular}{l|l|l|l}
+\begin{tabular}{l|l|l|l|l}
 \hline
-\multirow{1}{*}{Ref.} & \multicolumn{1}{c|}{Power [$\mu$W]} & \multicolumn{1}{c|}{SINAD [dB]} & \multicolumn{1}{c}{ENOB bit}\\\cline{1-4}
+\multirow{1}{*}{Ref.} & \multicolumn{1}{c|}{Power [$\mu$W]} & \multicolumn{1}{c|}{SINAD [dB]} & \multicolumn{1}{c|}{ENOB [bit]} & \multicolumn{1}{c}{FoM [pJ/step]}\\\cline{1-5}
 
-        \cite{ref_1} & 7600 & 91 & 16\\
+        \cite{ref_1} & 7600 & 91 & 16 & 0.37\\
+        \cite{ref_2} &  1200 & 89 & 14.5 & 3.24\\
+        \cite{ref_3} & 6600 & 82 & 14 & 16.11\\
+        \cite{SQNR} & 61 & 102.1 & 16.7 & 0.14\\
+        \cite{ref_4} & 1350 & 93 & 15.2 & 18.49 \\
+        \cite{ref_5} & 38.0 & 92 & 15.0 & 0.07 \\
+        \cite{ref_6} & 1630 & 99 & 16.2 & 1.12\\
+        \cite{ref_7} & 83 & 84.7 & 15 & 0.13\\
+        \cite{ref_8} & 210 & 95 & 15.5 & 0.23\\
+        \cite{ref_9} & 48 & 82 & 13.3 & 0.23\\
+        This work & 87 & 98.2 & 16.2 & 0.20\\
 \hline            
 \end{tabular}
 \end{table}

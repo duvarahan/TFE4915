@@ -1,20 +1,20 @@
-\chapter{Proposed architecture}\label{architecture}
+\chapter{Proposed Architecture}\label{architecture}
 
-The first $\Delta\Sigma$ modulator were first introduced by Inose, Yasuda and Murakami in 1962 \cite{first_delta}. Since then many modifications to the architecture have been proposed to improve its performance. There are four main aspects of the architecture where one can modify it: time-domain, order of the integrator, topology and the number of bits of the quantizer. In this chapter we will review the different alternatives for an architecture with respect to the four aspects. To ease the discussion, we will mainly focus on single-loop architectures since the specification given in chapter 1 only require 16 bit resolution. By designing a more complex system, we will only end up with an over-engineered proposal. 
+The $\Delta\Sigma$ modulator was first introduced by Inose, Yasuda and Murakami in 1962 \cite{first_delta}. Since then many modifications to the architecture have been proposed to improve its performance. There are four main aspects of the architecture where one can modify it: time-domain, order of loop filter, topology and the number of bits of the quantizer. In this chapter we will review the different alternatives for an architecture with respect to the four aspects. To ease the discussion, we will mainly focus on single-loop architectures, since it will be integrated in a microcontroller and a simple architecture is desired. By designing a more complex system, we will only end up with an over-engineered proposal. 
 
-A small discussion of the proposed architecture found in the feasibility study will be presented in the last section. The bases for the discussion is based on the well known book; \textit{Understanding Delta-Sigma Data Converters}\cite{Richard}. 
+A small discussion of the proposed architecture found in the feasibility study will be presented in the last section. The bases for the discussion is based on the well known book; \textit{Understanding Delta-Sigma Data Converters}\cite{Richard}. Additionally a discussion around different topology of OTAs, and the choice between single ended and fully differential output will be discussed.  
 
 \section{Order of loop filter}
 
-The expression of maximum SQNR for first order $\Delta\Sigma$ modulator \ref{no_noise_sqnr}, showed that for every doubling of the OSR yielded in increasing the SQNR with 9dB or ENOB with 1.5bits/octave. To be able to achieve a higher resolution (i.e., the ENOB), a larger OSR has to be used. The drawback with using a large OSR is that the correlation between the input signal and the quantization noise becomes stronger, causing correlation between white noise and idle tones which are presence inside the signal band. This causes the linear model expressed in Eq.\ref{no_noise_sqnr} to become invalid.
+The expression of maximum SQNR for first order $\Delta\Sigma$ modulator \ref{no_noise_sqnr} showed that for every doubling of the OSR yielded in increasing the SQNR with 9dB or ENOB with 1.5bits/octave. To be able to achieve a higher resolution i.e. higher ENOB, a larger OSR has to be used. The drawback with using a large OSR is that it requires large $f_s/f_b$, which can be hard or impossible to realize. 
 
-An obvious way to increase ENOB of the $\Delta\Sigma$ modulator is to use a high-order integrator. It can done by replacing the $\Delta\Sigma$ modulator in figure \ref{fig:linear} with \textit{L} number of $\Delta\Sigma$ modulators consecutively, where \textit{L} corresponds to the order of the integrator. The NTF can then be given by
+An obvious way to increase ENOB of the $\Delta\Sigma$ modulator is to use a high-order loop-filter. It can done by replacing the integrator in figure \ref{fig:linear} with \textit{L} number of integrator consecutively, where \textit{L} corresponds to the order of the loop-filter. The NTF can then be given by
 
 \begin{equation}
     NTF = (1-z^{-1})^L
 \end{equation}
 
-In figures \ref{fig:SQNR} and \ref{fig:ENOB} it is shown how much OSR one need to achieve ideal SQNR and ENOB respectively, for different order of integrator. It can be observed to achieve 16 bit resolution modulators on the order of 2 and 3 is sufficient. It can also be observed that the modulator with order 2 needs much larger OSR, which can cause problems with the linear model as mentioned before.
+In figures \ref{fig:SQNR} and \ref{fig:ENOB} it is shown how much OSR one need to achieve ideal SQNR and ENOB respectively, for different order of integrator. It can be observed to achieve 16 bit resolution, modulators on the order of 2 and 3 is sufficient. It can also be observed that the modulator with order 2 needs much larger OSR, which can cause problems with $f_s/f_b$.
 
 \begin{figure}
 \begin{minipage}[c]{0.5\linewidth}
@@ -54,10 +54,9 @@ and
     NTF = \frac{1}{1 + a_3c_3H(z) + a_2c_2c_3H^2(z) + a_1c_1c_2c_3H^3(z)}
 \end{equation}
 
-Here the forward coefficients ($c_1, c_2$ and $c_3$) represent the scaling or weighed of the integrators. The purpose of them is to scale the output dynamic range of the integrators. The coefficients on the feedback path ($a_2$ and $a_3$) are used to create a transfer function that gives a stable performance, while the feedback coefficient $a_1$ ensure that the output from the quantizer tracks the input.
+Here the forward coefficients ($c_1, c_2$ and $c_3$) represent the scaling or weighed of the integrators. The purpose of them is to scale the output dynamic range of the integrators. The coefficients on the feedback path ($a_2$ and $a_3$) are used to create a transfer function that gives a noise-shaping, while the feedback coefficient $a_1$ ensure that the output from the quantizer tracks the input.
 
-One of the major drawbacks with this topology is that the output swings of the integrators tends to get big, which
-means that the the op-amp requirement has to be increased to avoid overloading. Furthermore the forward coefficients $c_i$ has to become smaller in order to scale down the swing. The drawback on having small coefficients is that the area to maintain the same capacitor noise gets bigger, which leads to more power to charge capacitor. Another drawback is that unlike the feedforward-path, the output of the first integrator contains some amount of the input amplitude. This leads to higher swing capabilities, which again leads to a more power-consuming system.   
+One of the major drawbacks with this topology is that the output swings of the integrators tends to get big, which means that the the op-amp requirement has to be increased to avoid overloading. Furthermore the forward coefficients $c_i$ has to become smaller in order to scale down the swing. The drawback on having small coefficients is that the area to maintain the same capacitor noise gets bigger, which leads to more power to charge capacitor. Another drawback is that unlike the feedforward-path, the output of the first integrator contains some amount of the input amplitude. This leads to higher swing capabilities, which again leads to a more power-consuming system.   
 
 \begin{figure}[H]
 \centering
@@ -77,7 +76,7 @@ means that the the op-amp requirement has to be increased to avoid overloading. 
 \end{figure}
 
 \subsection{Feedforward topology}
-An example on the $3^{rd}$ order feedforward topology is depicted in figure \ref{fig:forward}. Unlike the feedback topology, this one has only one feedback from the quantized output. The coefficients ($a_1, a_2$ and $a_3$) are forwarded to the output, where their weight is added to the quantizer input. The STF and NTF are then given,
+An example on the $3^{rd}$ order feedforward topology is depicted in figure \ref{fig:forward}. Unlike the feedback topology, this one has only one feedback from the quantized output. The coefficients ($a_1, a_2$ and $a_3$) are forwarded to the output, where their weight is added to the quantizer input. The STF and NTF are then given respectively,
 
 \begin{equation}
     STF = \frac{b_1(a_1H(z) + c_2a_2H^2(z) + c_2c_3a_3H^3(z))}{1 + b_1(a_1H(z) + c_2a_2H^2(z) + c_2c_3a_3H^3(z))}
