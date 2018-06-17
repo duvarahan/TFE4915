@@ -2,7 +2,7 @@
 
 \section{ADC Converters Fundamentals }\label{fundamentals}
 
-The structure of an typical ADC is shown in the figure \ref{fig:adc_block}. It consists of four main blocks: an anti aliasing filter(AAF), a sample and hold circuit(S/H), a quantizer and a digital filter(decimator).
+The structure of an typical ADC is shown in the Fig. \ref{fig:adc_block}. It consists of four main blocks: an anti aliasing filter(AAF), a sample and hold circuit(S/H), a quantizer and a digital filter(decimator).
 \begin{figure}[h]
 \centering
 \includegraphics[scale=0.9]{images/adc_block.png}
@@ -30,7 +30,7 @@ The output signal $y(n)$ of the quantizer is a digital pulse train that gets sen
 
 \section{Performance metrics}
 
-There are many metrics used to determine the performance of an ADC as shown in \cite{Allen}, \cite{Johns}, \cite{Razavi}, \cite{Barker}, \cite{Malo} and \cite{Plass}. We will look at those which are most useful to measure the performance of a $\Delta\Sigma$ modulator. These are used to analyze the output spectrum of the modulator. For example we can obtain metrics such as SNR, SNDR, DR and ENOB by analyzing outputs as depicted in figure \ref{fig:metrics} for a determined input power. 
+There are many metrics used to determine the performance of an ADC as shown in \cite{Allen}, \cite{Johns}, \cite{Razavi}, \cite{Barker}, \cite{Malo} and \cite{Plass}. We will look at those which are most useful to measure the performance of a $\Delta\Sigma$ modulator. These are used to analyze the output spectrum of the modulator. For example we can obtain metrics such as SNR, SNDR, DR and ENOB by analyzing outputs as depicted in Fig. \ref{fig:metrics} for a determined input power. 
 
 \subsection{Resolution}
 Resolution of a converter is defined as the distinct number of analog levels corresponding to the different digital words. Thus, if the ADC has a N-bit resolution, the converter can resolve $2^N$ distinct analog levels.
@@ -86,7 +86,7 @@ The Nyquist-rate converters are based on the well known sampling theorem also kn
 \end{equation}
 
 \subsection{Oversampling converters}
-In the preceding section it was mentioned that Nyquist-rate converters will use an input occupying a large potion of the available bandwidth. Oversampling converters on the other hand only occupy a small portion of the bandwidth, thus spreading the quantization noise over a wider frequency range as depicted in figure \ref{fig:oversample}. This causes the quantization noise to be reduced.  
+In the preceding section it was mentioned that Nyquist-rate converters will use an input occupying a large potion of the available bandwidth. Oversampling converters on the other hand only occupy a small portion of the bandwidth, thus spreading the quantization noise over a wider frequency range as depicted in Fig. \ref{fig:oversample}. This causes the quantization noise to be reduced.  
 
 \begin{figure}[h]
 \centering
@@ -110,7 +110,7 @@ To establish the advantage of oversampling converters compared to Nyquist-rate c
 
 If we compare equation \ref{max_sqnr} with equation \ref{no_noise_sqnr}, we can see that the oversampling rate ADC can achieve the same SQNR performance as a Nyquist-rate ADC with fewer bits. Further it can be seen that for every doubling of OSR improves the SQNR with $3 dB$, or ENOB by $0.5bits/octave$. 
 
-Another advantage of using oversampling ADCs is that the specifications of the AAF are relaxed, because the signal bandwidth is smaller than $\frac{f_s}{2}$. As shown in figure \ref{fig:AAF}, the spectral components higher than the bandwidth $f_b$ in a oversampling converter are more separated than in a Nyquist-rate converter. 
+Another advantage of using oversampling ADCs is that the specifications of the AAF are relaxed, because the signal bandwidth is smaller than $\frac{f_s}{2}$. As shown in Fig. \ref{fig:AAF}, the spectral components higher than the bandwidth $f_b$ in a oversampling converter are more separated than in a Nyquist-rate converter. 
 
 \begin{figure}
 \centering
@@ -131,7 +131,7 @@ Another advantage of using oversampling ADCs is that the specifications of the A
 \end{figure}
 
 \section{Noise-shaping ADC}
-To get a better understanding of noise-shaping, we have to first look at the $\Delta\Sigma$ modulator. The structure of typical $\Delta\Sigma$ ADC is shown in figure \ref{fig:delta_block}, which consists of four main blocks: a AAF, a S/H circuit, a $\Delta\Sigma$ modulator and a decimator. The AAF, S/H circuit and the decimator operates as explained in section \ref{fundamentals}.
+To get a better understanding of noise-shaping, we have to first look at the $\Delta\Sigma$ modulator. The structure of typical $\Delta\Sigma$ ADC is shown in Fig. \ref{fig:delta_block}, which consists of four main blocks: a AAF, a S/H circuit, a $\Delta\Sigma$ modulator and a decimator. The AAF, S/H circuit and the decimator operates as explained in section \ref{fundamentals}.
 
 \begin{figure}[h]
 \centering
@@ -140,10 +140,10 @@ To get a better understanding of noise-shaping, we have to first look at the $\D
 \label{fig:delta_block}
 \end{figure}
 
-Even though all four blocks are essential to the ADC, our main focus for this thesis is the $\Delta\Sigma$ modulator. As shown from the figure \ref{fig:delta_block}, the $\Delta\Sigma$ modulator consists of a loop filter ($H(z)$) along with an internal quantizer and a DAC, which together makes a negative feedback loop. The basic operation of the modulator is to compare the input signal with an estimate of the output data and quantizing this difference. This structure is advantageous for oversampling signals since the amplitude of the subtracted signal $x_d(n)$ is smaller than for the input signal $u(n)$. By having a loop filter with a very high gain in the signal band, the in-band quantization noise is strongly attenuated by the feedback loop. The input signal will nearly pass unaffected through to the output. This process is known as \textit{noise-shaping}.
+Even though all four blocks are essential to the ADC, our main focus for this thesis is the $\Delta\Sigma$ modulator. As shown from the Fig. \ref{fig:delta_block}, the $\Delta\Sigma$ modulator consists of a loop filter ($H(z)$) along with an internal quantizer and a DAC, which together makes a negative feedback loop. The basic operation of the modulator is to compare the input signal with an estimate of the output data and quantizing this difference. This structure is advantageous for oversampling signals since the amplitude of the subtracted signal $x_d(n)$ is smaller than for the input signal $u(n)$. By having a loop filter with a very high gain in the signal band, the in-band quantization noise is strongly attenuated by the feedback loop. The input signal will nearly pass unaffected through to the output. This process is known as \textit{noise-shaping}.
 
 \section{First order $\Delta\Sigma$ modulator}\label{first_order}
-To get the basic understanding in how this system works, a linear model of the $\Delta\Sigma$ modulator is shown in figure \ref{fig:linear}. The quantizer is replaced with its noise source \textit{e(n)} which we assume is white noise, and the DAC is replaced with a wire since we assume it is ideal. The system can be described by the transfer from each of the independent inputs: \textit{e(n)} and \textit{u(n)} to the output \textit{y(n)}. 
+To get the basic understanding in how this system works, a linear model of the $\Delta\Sigma$ modulator is shown in Fig. \ref{fig:linear}. The quantizer is replaced with its noise source \textit{e(n)} which we assume is white noise, and the DAC is replaced with a wire since we assume it is ideal. The system can be described by the transfer from each of the independent inputs: \textit{e(n)} and \textit{u(n)} to the output \textit{y(n)}. 
 
 \begin{equation}
     Y(Z) = \frac{H(z)}{1+H(z)}U(z) + \frac{1}{1+H(z)}E(z)

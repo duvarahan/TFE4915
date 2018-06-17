@@ -1,9 +1,8 @@
-\chapter{Circuit design}
-This chapter describe the design methodology in implementing analog blocks used in third order $\Delta\Sigma$ modulator, and also address the issues involving the design of the modulator. 
-
+\chapter{Circuit Design}
+This chapter describe the design methodology of implementing analog blocks used in third order $\Delta\Sigma$ modulator, and also address the issues involving the design of the modulator. 
 Moreover the procedure to obtain the final transistor dimensions were based on the $gm/I_D$ methodology and on iterative simulations, since the equations used in the SPICE level 1 are not accurate. 
 
-\section{Switched-Capacitor Circuits}
+\section{Switched-capacitor circuits}
 
 As discussed in chapter \ref{architecture} resistors occupy huge space in a layout and they are also the sources of noises, which makes them unattractive to use in integrated circuits. A switched capacitor circuit can be used to emulate the behaviour of a resistor by a capacitor in and out of the circuit. Figure \ref{fig:switched_cap} depict a switch-capacitor circuit, where \textit{$V_1$} and \textit{$V_2$} are two dc voltage sources. The clock periods $\phi_1$ and $\phi_2$ are a pair of overlapping clocks, which means that the capacitor $C_1$ is charged to $V_1$ and then $V_2$ during each clock period. This charge transfer is repeated every clock period with a clock period of $T_s$. Thus, the average current is given by the charge moved in one clock period\cite{Johns}:  
 
@@ -41,8 +40,8 @@ Comparing equations \ref{sw_res} and \ref{eq}, we see that the average current t
 
 A disadvantage is that the switches are implemented using transistors, and their non-idealities can degrade the SC circuit performance. 
 
-\section{Switched-Capacitor Integrators}
-A differential switched-capacitor integrator circuit is shown in Fig. \ref{fig:DT_integrator}. It is known for its insensitive to parasitic capacitance of the sampling capacitor ($C_s$). The operation of the SC integrator can be explained by examining the charges on the capacitors on each clock phase. For simplicity we will only look at the top half circuit, since the bottom one has the same operation. It is assumed that the initial voltage stored in $C_f$ is zero. Switches \textit{S1} and \textit{S3} are closed during phase $\Phi_1$, while the others are closed during phase $\Phi_2$. Note that $\Phi_1$ and $\Phi_2$ are two non-overlapping phases. When \textit{S1} and \textit{S3} are closed, the input source charges the capacitor $C_s$ to a initial charge of $C_sV_{IN}$. During phase $\Phi_2$ switches \textit{S2} and \textit{S4} are closed. Thus the input is disconnected from the circuit, and the bottom plate of capacitor $C_s$ is connected to ground. Therefore the charge stored on the capacitor $C_s$ is transferred to the capacitor $C_f$. Then when phase $\Phi_1$ is active again the input voltage charge $C_s$ with a new sample. Then during phase $\Phi_2$, the charge from the new sample is transferred to the capacitor $C_f$ where it accumulates with the previous charge from the first operation. The integrator corresponds to a non-inverting one, and the transfer function is given by equation \ref{transfer_integrator}.
+\section{Switched-capacitor integrators}
+A differential switched-capacitor integrator circuit is shown in Fig. \ref{fig:DT_integrator}. It is known for its insensitive to parasitic capacitance of the sampling capacitor ($C_s$). The operation of the SC integrator can be explained by examining the charges on the capacitors on each clock phase. For simplicity we will only look at the top half circuit, since the bottom one has the same operation. It is assumed that the initial voltage stored in $C_f$ is zero. Switches \textit{S1} and \textit{S3} are closed during phase $\Phi_1$, while the others are closed during phase $\Phi_2$. Note that $\Phi_1$ and $\Phi_2$ are two non-overlapping phases. When \textit{S1} and \textit{S3} are closed, the input source charges the capacitor $C_s$ to a initial charge of $C_sV_{IN}$. During phase $\Phi_2$, switches \textit{S2} and \textit{S4} are closed. Thus the input is disconnected from the circuit, and the bottom plate of capacitor $C_s$ is connected to ground. Therefore the charge stored on the capacitor $C_s$ is transferred to the capacitor $C_f$. Then when phase $\Phi_1$ is active again the input voltage charge $C_s$ with a new sample. Then during phase $\Phi_2$, the charge from the new sample is transferred to the capacitor $C_f$ where it accumulates with the previous charge from the first operation. The integrator corresponds to a non-inverting one, and the transfer function is given by equation \ref{transfer_integrator}.
 
 \begin{figure}[h]
 \centering
@@ -52,7 +51,7 @@ A differential switched-capacitor integrator circuit is shown in Fig. \ref{fig:D
 \end{figure}
 
 
-\subsection{Channel Charge Injection and Bottom-Plate Sampling}
+\subsection{Channel charge injection and bottom-plate sampling}
 Charge injection can be understood using the circuit in Fig. \ref{fig:charge_injection}. When the MOSFET switch is \textit{on} and $V_{DS}$ is small, there is a charge present in the inversion layer called channel charge $Q_{ch}$. When the MOSFET turns of, this charge is injected onto the capacitor $C_{load}$ and into $V_{in}$. Since $V_{in}$ is assumed to be a low-impedance, source driven node, the injected charge has no effect on this node. However, the charge injected onto $C_{load}$ results in a change in voltage across it, introducing an error in reading the correct input signal. 
 
 \begin{figure}[H]
@@ -71,11 +70,11 @@ Although charge injection mechanism is complex to characterize, many techniques 
 \label{fig:bottom_sampling}
 \end{figure}
 
-\subsection{Correlated Double Sampling}
+\subsection{Correlated double sampling}
 
 Correlated double sampling (CDS) technique was first introduced by White, Lampe, Biaha and Mack \cite{cds} as a technique for removal of switching transients and elimination of the Nyquist noise. What is more interesting is that it can be used to attenuate errors due to flicker noise $1/f$, finite offset voltage and finite opamp gain \cite{corr}. The technique is only used on the first integrator since the noise contribution is most critical in it. The noise contribution in the subsequent integrators are small, since the noise will be significantly attenuated as discussed in the feasibility study. 
 
-We will use a simple SC integrator depict in Fig. \ref{fig:cds} to illustrate how the CDS technique works. During $\phi_1$, the capacitor $C_2'$ samples the input offset voltage of the opamp. Then $C_2'$ is connected in series with the opamp's inverting input during phase $\phi_2$. The error from the opamp gets subtracted from the one stored in $C_2'$, thus minimizing it. For a differential SC integrator a symmetrical circuit of the one shown in \ref{fig:cds} is connected to the non-inverting input.  
+We will use a simple SC integrator depicted in Fig. \ref{fig:cds} to illustrate how the CDS technique works. During $\phi_1$, the capacitor $C_2'$ samples the input offset voltage of the opamp. Then $C_2'$ is connected in series with the opamp's inverting input during phase $\phi_2$. The error from the opamp gets subtracted from the one stored in $C_2'$, thus minimizing it. For a differential SC integrator a symmetrical circuit of the one shown in \ref{fig:cds} is connected to the non-inverting input.  
 
 \begin{figure}[ht]
 \centering
@@ -84,11 +83,11 @@ We will use a simple SC integrator depict in Fig. \ref{fig:cds} to illustrate ho
 \label{fig:cds}
 \end{figure}
 
-Another thing to note is that CDS will square the effective gain to the opamp due the extra capacitors, so the open-loop gain of the OTA for integrator will get relaxed, as seen in table \ref{spec_ota}, but at the expanse of bigger area. The resulting schematic of integrator 1 is shown in Fig. ?? 
+Another thing to note is that CDS will square the effective gain to the opamp due the extra capacitors, so the open-loop gain of the OTA for integrator will get relaxed, as seen in table \ref{spec_ota}, but at the expanse of bigger area. The resulting schematic of integrator 1 is shown in Fig. \ref{app:integrator_1}, and the schematic used for the other two integrators is shown in Fig. \ref{app:integrator_rest} in appendix \ref{app:cicuits}. 
 
 
 \section{Switches}
-Sampling switches is one of the most fundamentals analog blocks of ADC operating on discrete-time. An ideal switch is just short circuit when it is \textit{on} and an open circuit when it is \textit{off}. In other words when the switch is \textit{on} there should be zero resistance, and when the switch is \textit{off} there should be an infinity resistance. But as discussed in section \ref{on-resistance}, these values are not feasible. Therefore designing the switches with adequate on-resistances without degrading the performance is a crucial part of designing a data converter. 
+Sampling switches is one of the most fundamentals analog blocks of ADC operating on discrete-time. An ideal switch is just short circuit when it is on and an open circuit when it is off. In other words when the switch is on there should be zero resistance, and when the switch is off there should be an infinity resistance. But as discussed in section \ref{on-resistance}, these values are not feasible. Therefore designing the switches with adequate on-resistances without degrading the performance is a crucial part in the design of integrated circuits (ICs). 
 
 The commonly used switch implementations are: a NMOS transistor, a PMOS transistor or a transmission gate (TG). The on-resistance of a MOSFET depends on the input signal, as given in \cite{Allen}, and rewritten in expression \ref{R_on}:
 
@@ -96,7 +95,7 @@ The commonly used switch implementations are: a NMOS transistor, a PMOS transist
     R_{on} = \frac{1}{\mu C_{ox}\frac{W}{L}(V_{GS} - V_T)}
 \end{equation}
 
-From the expression we get that the time-constant increases for more positive NMOS or negative PMOS inputs. Designing a switch with large enough input swing capability is a challenge in low-voltage application. The reason being that as the technology scales, the supply voltage scales down much faster than the threshold voltage of a transistor. For a NMOS the operation is restricted to a input swing lower than $V_{DD} - V_{thn}$, and for PMOS the swing must be greater than $V_{thp}$. 
+Where the mobility $\mu$ is different depending on if we look at NMOS or PMOS transistor. We have that the time-constant increases for more positive NMOS or negative PMOS inputs. Designing a switch with large enough input swing capability is a challenge in low-voltage application. The reason being that as the technology scales, the supply voltage scales down much faster than the threshold voltage of a transistor. For a NMOS the operation is restricted to a input swing lower than $V_{DD} - V_{thn}$, and for PMOS the swing must be greater than $V_{thp}$. 
 
 Transmission gate is a technique that can be used to accommodate greater swings \cite{Barker}. It consists of a PMOS in parallel with a NMOS transistor as shown in Fig. \ref{fig:TG_switch}. The disadvantage of such switch is to have extra circuit to implement the complementary clocks, but it is a small price to pay for an improvement as good as rail-to.rail swing across the switch.     
 
@@ -107,9 +106,9 @@ Transmission gate is a technique that can be used to accommodate greater swings 
 \label{fig:TG_switch}
 \end{figure}
 
-After choosing the topology for the switch, the dimensions of the transistors were found. Using equation \ref{R_on} and Fig. \ref{fig:TG_switch} we get that: $V_{GS} = \phi_1 - v_{in}$, where $\phi_1$ is $V_{DD}=1.8V$ when it is \textit{on} and 0V when it is \textit{off}. After completing a simulation it was found out that the on-resistance for the resistors were too high. We cannot change the swing of the input voltage $V_{in}$, since it is given by the system. The options were either to increase the dimension $\frac{W}{L}$ or increase the gate voltage $\phi$ when it is high. Since we want to keep the dimensions as small as possible, we increased the gate voltage. In order to increase the supply voltage $V_{DD}$ a charge pump was used \cite{charge_pump}. It is a Dc-to-Dc converter that can take a a DC source from one level to another. In our case it was found out that doubling $V_{DD}$ was sufficient enough to get the on-resistance in the range we wanted. The charge pump was not implemented on circuit level, instead an ideal DC source was used to mimic the behaviour of the charge pump. Finally we used a level-shifter \cite{William} to translate signals from one voltage domain to another, namely $[0,V_{DD}]$ to $[0,2V_{DD}]$. 
+After choosing the topology for the switch, the dimensions of the transistors were found. Using equation \ref{R_on} and Fig. \ref{fig:TG_switch} we get that: $V_{GS} = \phi_1 - v_{in}$, where $\phi_1$ is $V_{DD}=1.8V$ when it is on and 0V when it is off. After completing a simulation it was found out that the on-resistance for the resistors were too high. We cannot change the swing of the input voltage $V_{in}$, since it is given by the system. The options were either to increase the dimension $\frac{W}{L}$ or increase the gate voltage $\phi$ when it is high. Since we want to keep the dimensions as small as possible, we increased the gate voltage. In order to increase the supply voltage $V_{DD}$ a charge pump was used \cite{charge_pump}. It is a Dc-to-Dc converter that can take a a DC source from one level to another. In our case it was found out that doubling $V_{DD}$ was sufficient enough to get the on-resistance in the range we wanted. The charge pump was not implemented on circuit level, instead an ideal DC source was used to mimic the behaviour of the charge pump. Finally we used a level-shifter \cite{William} to translate signals from one voltage domain to another, namely $[0,V_{DD}]$ to $[0,2V_{DD}]$. 
 
-The switches were chosen to have minimum dimensions. Moreover the PMOS transistors were chosen to be three times bigger than the NMOS transistors to account lower mobility.. for varying switching time, and make the on-resistance more independent of the input voltage. The final dimensions for the switches of integrator 1 are listed in table \ref{R_on_1} and for integrator 2,3 and the sum block in tables \ref{R_on_2}, \ref{R_on_3} and \ref{R_on_sum} respectively in appendix \ref{app:on_resistance}. Compared with table \ref{on-resistance} we see that the on-resistance of the switches of the integrators approximately meets the specifications. It does not matter if the on-resistances varies with a couple of $\Omega s$ since it only affect the performance to a small degree. 
+The switches were chosen to have minimum dimensions. Moreover the PMOS transistors were chosen to be three times bigger than the NMOS transistors to account for lower mobility. The final dimensions for the switches of integrator 1 are listed in table \ref{R_on_1} and for integrator 2,3 and the sum block in tables \ref{R_on_2}, \ref{R_on_3} and \ref{R_on_sum} respectively in appendix \ref{app:on_resistance}. Compared with table \ref{on-resistance} we see that the on-resistance of the switches of the integrators approximately meets the specifications. It does not matter if the on-resistances varies with a couple of $\Omega s$ since it only affect the performance to a small degree. The same justifications apply for the other analog blocks. 
 
 \begin{table}[ht]
 \centering
@@ -125,9 +124,9 @@ I20    & 11.7/0.55  & 3.9/0.55   & 903.8 \\ \hline
 \end{tabular}
 \end{table}
 
-\section{Operational Tranceconductance Amplifier}
+\section{Operational tranceconductance amplifier}
 
-Operational tranceconductance amplifier (OTA) is the most important component of integrators in the $\Delta\Sigma$ modulator. Its specifications determine the performance of the integrator, thus of the whole modulator. Selection of topology for the OTAs and the design procedure to meet the specifications given by table \ref{spec_ota} will be discussed in the subsequent sections. 
+Operational tranceconductance amplifier (OTA) is the most important component of integrators in the $\Delta\Sigma$ modulator. Its specifications determine the performance of the integrator, thus of the whole modulator. The design procedure to meet the specifications given by table \ref{spec_ota} will be discussed in the subsequent sections. 
 
 \subsection{Selection of topology}
 There are many architecture to choose from when designing a OTA, and they can be classified into two categories: single-stage and two-stage OTAs. In the single-stage category there are especially two architectures which are common to choose for low voltage/power operation: telescopic cascode and folded cascode. The conventional two-stage OTA is the miller configuration which commonly needs a class AB stage to enhance its speed \cite{two_stage_1},\cite{two_stage_2}. Table \ref{comparisom_OTA} compare the three OTAs in terms of power consummation, output-swing and speed.
@@ -152,12 +151,14 @@ The selection between folded cascode and telescopic cascode depends on the perfo
 \subsection{Single ended vs fully differential output }
 In practice, fully differential output is used because it has many advantages over single ended \cite{Johns}. Some being:
 
-$\bullet$ \textbf{Larger voltage output swing}: since the fully differential has twice as many output as the single ended one, the voltage output swing is almost double in magnitude. 
+\begin{itemize}
 
-$\bullet$ \textbf{Higher SNR}: Since the voltage output swing is large we get a higher signal-to-noise ratio (SNR). The signal output power becomes four times bigger because of twice the output voltage, also the noise power is doubled. Hence we get a overall 3dB improvement in SNR or 0.5 bit improvement in effective number of bits (ENOB).
+\item \textbf{Larger voltage output swing}: since the fully differential has twice as many output as the single ended one, the voltage output swing is almost double in magnitude. 
 
-$\bullet$ \textbf{Better noise rejection}: It is less susceptibility to common mode noise.
+\item \textbf{Higher SNR}: Since the voltage output swing is large we get a higher signal-to-noise ratio (SNR). The signal output power becomes four times bigger because of twice the output voltage, also the noise power is doubled. Hence we get a overall 3dB improvement in SNR or 0.5 bit improvement in effective number of bits (ENOB).
 
+\item \textbf{Better noise rejection}: It is less susceptibility to common mode noise.
+\end{itemize}
 One important thing to note with fully differential circuits is that they need additional circuit to keep the output common mode level stable i.e. a common mode feedback circuit is needed, which we will discuss later. This additional circuit causes larger area and higher power consumption compared to single ended topology\cite{Allen}. 
 
 \subsection{The $g_m/I_D$ methodology}

@@ -8,7 +8,7 @@ A small discussion of the proposed architecture found in the feasibility study w
 
 The expression of maximum SQNR for first order $\Delta\Sigma$ modulator \ref{no_noise_sqnr} showed that for every doubling of the OSR yielded in increasing the SQNR with 9dB or ENOB with 1.5bits/octave. To be able to achieve a higher resolution i.e. higher ENOB, a larger OSR has to be used. The drawback with using a large OSR is that it requires large $f_s/f_b$, which can be hard or impossible to realize. 
 
-An obvious way to increase ENOB of the $\Delta\Sigma$ modulator is to use a high-order loop-filter. It can done by replacing the integrator in figure \ref{fig:linear} with \textit{L} number of integrator consecutively, where \textit{L} corresponds to the order of the loop-filter. The NTF can then be given by
+An obvious way to increase ENOB of the $\Delta\Sigma$ modulator is to use a high-order loop-filter. It can done by replacing the integrator in Fig. \ref{fig:linear} with \textit{L} number of integrator consecutively, where \textit{L} corresponds to the order of the loop-filter. The NTF can then be given by
 
 \begin{equation}
     NTF = (1-z^{-1})^L
@@ -86,25 +86,25 @@ An example on the $3^{rd}$ order feedforward topology is depicted in figure \ref
     NTF = \frac{1}{1 + b_1(a_1H(z) + c_2a_2H^2(z) + c_2c_3H^3(z))}
 \end{equation}
 
-By moving the coefficients to the summation node in front of quantizer, the signal presented at integrators output will be significantly lower than at the feedback topology. This leads to lesser swings and scaling, which means that the op-amp requirement can be relaxed, which leads to less power consumption. However one should be aware of operating on input amplitude near the reference voltage ($V_{ref}$), as this will drive the modulator to instability. The feedforward topology can further be improved by having a feedfoward path from input signal to the summation node in front of the quantizer, as shown in figure \ref{fig:input}. This means that the integrators do not process the input signal, only quantization noise $U$, and this leads to low distortion\cite[Ch.4.4.2]{Richard}, further relaxing the requirement for the integrator's op-amp. One thing to notice is that having fewer internal feedback DACs reduce the power dissipation significantly. 
+By moving the coefficients to the summation node in front of quantizer, the signal presented at integrators output will be significantly lower than at the feedback topology. This leads to lesser swings and scaling, which means that the op-amp requirement can be relaxed, which leads to less power consumption. However one should be aware of operating on input amplitude near the reference voltage ($V_{ref}$), as this will drive the modulator to instability. The feedforward topology can further be improved by having a feedfoward path from input signal to the summation node in front of the quantizer, as shown in Fig. \ref{fig:input}. This means that the integrators do not process the input signal, only quantization noise $U$, and this leads to low distortion\cite[Ch.4.4.2]{Richard}, further relaxing the requirement for the integrator's op-amp. One thing to notice is that having fewer internal feedback DACs reduce the power dissipation significantly. 
 
 \begin{figure}\label{final_top}
 \centering
-\includegraphics[scale=0.38]{images/feedforward.png}
+\includegraphics[scale=0.35]{images/feedforward.png}
 \caption{$3^{rd}$ order feedforward topology with input signal forwarded to summation node}
 \label{fig:input}
 \end{figure}
 
 \section{Time-domain}
-The $\Delta\Sigma$ modulator can operate in a discrete-time domain (DT) or in the continuous-time domain(CT)\cite{Richard}. We have already seen how DT modulator operates in chapter 2. Figure \ref{fig:cont} illustrates a simple first order $\Delta\Sigma$ modulator. Unlike the DT $\Delta\Sigma$ modulator, the input signal and the integrator are continuous and the sampling occurs only before quantization. The STF and NTF for CT modulators has the same as the DT one.    
+The $\Delta\Sigma$ modulator can operate in a discrete-time domain (DT) or in the continuous-time domain(CT)\cite{Richard}. We have already seen how DT modulator operates in chapter \ref{Background_theory}. Figure \ref{fig:cont} illustrates a simple first order continuous time (CT) $\Delta\Sigma$ modulator. Unlike the DT $\Delta\Sigma$ modulator, the input signal and the integrator are continuous and the sampling occurs only before quantization. The STF and NTF for CT modulators has the same as the DT one.    
 
 The main difference, is the way they are implemented. The DT $\Delta\Sigma$ modulators employ switched-capacitor (SC) integrators while CT systems use active-RC integrators in the modulators. To choose the right domain for a application, one has to look at the advantages and disadvantages of associated with each option.
 
-Switched-capacitor has the perk of taking advantages on fine-line VLSI capabilities by eliminating the need to use physical resistors. Furthermore capacitors have high linearity, which is difficult to achieve with on-chip resistors in a standard CMOS process. In addition, the resistors in CT integrators can not afford to get too big as it can affect the thermal noise by increasing it, but having small resistors can increase the feedback capacitors, if one want to preserve the same settling time. 
+Switched-capacitor has the perk of taking advantages on fine-line very large scale of integration (VLSI) capabilities by eliminating the need to use physical resistors. Furthermore capacitors have high linearity, which is difficult to achieve with on-chip resistors in a standard CMOS process. In addition, the resistors in CT integrators can not afford to get too big as it can affect the thermal noise by increasing it, but having small resistors can increase the feedback capacitors, if one want to preserve the same settling time. 
 
-The accuracy of SC integrators is good, since the transfer function of an SC circuit scales naturally with the clock frequency. The resistors and capacitors which get subjected to large production variation makes up the time-constants of CT integrators, which means that the accuracy of the CT integrators will be inferior to SC integrators\cite[Ch.6.6]{Richard}. Another advantage is that the SC systems is less sensitive to clock jitter.
+The accuracy of SC integrators is good, since the matching between capacitors are much better than matching between capacitor and resistors. Hence, the accuracy of the CT integrators will be inferior to SC integrators\cite[Ch.6.6]{Richard}. Another advantage is that the SC systems is less sensitive to clock jitter.
 
-The CT modulators is attractive to high-speed applications as it can achieve very high OSR, while SC modulators are limited by the achievable bandwidth of the opamps. Instead of having AAF outside the modulator as the DT modulator, the CT modulator has implicit AAF. The elimination of this filter can lead to power savings for the receiver.
+The CT modulators is attractive to high-speed applications as it can achieve very high OSR and is four times faster than DT modulators\cite{Richard}. The DT modulators are limited by the achievable bandwidth of the opamps. Instead of having AAF outside the modulator as the DT modulator, the CT modulator has implicit AAF, since the sampling happens outside the loop-filter which is low-pass. The elimination of this filter can lead to power savings for the receiver.
 
 \begin{figure}[H]
 \centering
@@ -113,15 +113,15 @@ The CT modulators is attractive to high-speed applications as it can achieve ver
 \label{fig:cont}
 \end{figure}
 
-\section{Single-bit vs Multi-bit Quantizer}
-For a full-scale, the quantization error is reduced by 6dB for every bit added to the resolution of the quantizer\cite[Ch.6]{Richard}. Meaning that the SQNR will increase with this amount leading to a more stable operation. This is especially good for modulators of high order. Also the feedback loop becomes more linear, consequently allowing us to choose NTF more aggressively. Hence even better SQNR can be obtained, and larger input signals can be used. This and more advantages makes multi-bit quantizer attractive to use. However the errors introduced by DACs is not attenuated as quantization errors. Since the DAC's output goes to the input signal, the errors will get injected with the signal. Consequently the linearity of the modulator is deepened on the  linearity of the DAC. Multi-bit quantizer struggles with being linear, and need costly corrections techniques to keep up with the high linearity demand. This is no problem for single-bit quantizer, since the DAC is inherently linear.
+\section{Single-bit vs multi-bit quantizer}
+For a full-scale, the quantization error is reduced by 6dB for every bit added to the resolution of the quantizer\cite[Ch.6]{Richard}. Meaning that the SQNR will increase with this amount leading to a more stable operation. This is especially good for modulators of high order. Also the feedback loop becomes more linear, consequently allowing us to choose NTF more aggressively. Hence even better SQNR can be obtained, and larger input signals can be used. This and more advantages makes multi-bit quantizer attractive to use. However the errors introduced by DACs are not attenuated as quantization errors. Since the DAC's output goes to the input signal, the errors will get injected with the signal. As the linearity of the modulator is deepened on the linearity of the DAC. Multi-bit quantizer struggles with being linear, and need costly corrections techniques to keep up with the high linearity demand. This is not a problem for single-bit quantizer, since the DAC is inherently linear.
 
 Another advantage with multi-bit quantizer is that it does not require large OSR as single-bit. Meaning the requirement for the bandwidth of a opamp can be relaxed. However adding more bits leads to a bigger power dissipation, making single-bit quantizer more attractive for applications that demand low power.
 
 \section{Choosing architecture}
-The requirement of the modulator is to achieve 16-bit resolution. Three things were considered in choosing the right architecture: area, power and requirement for the system. The final architecture that was selected was a discrete-time third-order single-bit single-loop feedforward architecture with input forwarded into the summation node, as shown in figure \ref{fig:input}.
+The requirement of the modulator is to achieve 16-bit resolution. Three things were considered in choosing the right architecture: area, power and requirement for the system. The final architecture that was selected was a discrete-time third-order single-bit single-loop feedforward architecture with the input forwarded into the summation node, as shown in Fig. \ref{fig:input}.
 
-The choice of modulator order was between second and third order, which both satisfied the specification with OSRs: 256 and 128 respectively. As the mentioned in section 3.1, the high OSR of second order can cause the quantization noise to become stronger. Furthermore, the high OSR also leads to stricter requirement for the opamp. The third order modulator takes bigger area and has stricter stability requirement, but having a relax requirement seemed more desirable. However the OSR was chosen to be 170, as we want the theoretical SQNR to be 10-20dB more than the desired SNR in order to allow degradation in SQNR due circuits non-idealities and leave as much of the noise budget for thermal noise\cite[Ch.9.2]{Richard}.
+The choice of modulator order was between second and third order, which both satisfied the specification with OSRs: 256 and 128 respectively. As the mentioned in section 3.1, the high OSR of second order can cause the ratio between the sampling frequency and the bandwidth to become large. Furthermore, the high OSR also leads to stricter requirement for the opamp. The third order modulator takes bigger area and has stricter stability requirement, but having a relax requirement seemed more desirable. However the OSR was chosen to be 170, as we want the theoretical SQNR to be 10-20dB more than the desired SNR in order to allow degradation in SQNR due circuits non-idealities and leave as much of the noise budget for thermal noise\cite[Ch.9.2]{Richard}.
 
 The feedforward topology was chosen because it gives the best $SNR_{peak}$. Moreover implementing feedback means that the power dispassion gets significantly larger, since the DAC's output is connected to the output of the integrators. One thing to remember is to have input amplitude a few dB under $V_{ref}$. Since $V_{ref}$ was chosen to be 1V, the input amplitude was chosen to be 0.5.
 
@@ -132,7 +132,7 @@ summarized in table \ref{spec}.
 % \usepackage{booktabs}
 \begin{table}[H]
 \centering
-\caption{Specification for Modulator}
+\caption{Specification for ,odulator}
 \label{spec}
 \begin{tabular}{@{}ll@{}}
 \toprule
